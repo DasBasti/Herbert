@@ -1,19 +1,143 @@
 <html>
 <head> 
-<title>HERBERT 1.0</title> 
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>HERBERT %version%</title> 
+<style type="text/css">
+<!--
+
+/*----- Tabs -----*/
+.tabs {
+    width:100%;
+    display:inline-block;
+}
+ 
+    /*----- Tab Links -----*/
+    /* Clearfix */
+    .tab-links:after {
+        display:block;
+        clear:both;
+        content:'';
+    }
+ 
+    .tab-links li {
+        margin:0px 5px;
+        float:left;
+        list-style:none;
+    }
+ 
+        .tab-links a {
+            padding:9px 15px;
+            display:inline-block;
+            border-radius:3px 3px 0px 0px;
+            background:#7FB5DA;
+            font-size:36px;
+            font-weight:600;
+            color:#4c4c4c;
+            transition:all linear 0.15s;
+        }
+ 
+        .tab-links a:hover {
+            background:#a7cce5;
+            text-decoration:none;
+        }
+ 
+    li.active a, li.active a:hover {
+        background:#a7cce5;
+        color:#4c4c4c;
+    }
+ 
+    /*----- Content of Tabs -----*/
+    .tab-content {
+        padding:15px;
+        border-radius:3px;
+        box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
+        background:#fff;
+    }
+ 
+        .tab {
+            display:none;
+        }
+ 
+        .tab.active {
+            display:block;
+        }
+
+.button {
+display:block;
+width: 90%;
+text-align:center;
+            padding:35px 35px;
+            margin:15px 15px;
+            display:inline-block;
+            border-radius:10px 10px 10px 10px;
+            background:#ddd;
+            font-size:32px;
+            font-weight:600;
+            color:#4c4c4c;
+}
+-->
+</style>
+
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script>
+jQuery(document).ready(function() {
+    jQuery('.tabs .tab-links a').on('click', function(e)  {
+        var currentAttrValue = jQuery(this).attr('href');
+ 
+        // Show/Hide Tabs
+        jQuery('.tabs ' + currentAttrValue).show().siblings().hide();
+ 
+        // Change/remove current tab to active
+        jQuery(this).parent('li').addClass('active').siblings().removeClass('active');
+ 
+        e.preventDefault();
+    });
+});
+</script>
 
 </head>
 <body>
+
 <h1>HERBERT</h1>
-<h2>Relais</h2>
-<a href="/PowerSocket/Toggle/1">%r1%</a> | 
-<a href="/PowerSocket/Toggle/2">%r2%</a> | 
-<a href="/PowerSocket/Toggle/3">%r3%</a> | 
-<a href="/PowerSocket/Toggle/4">%r4%</a> | 
-<a href="/PowerSocket/Toggle/5">%r5%</a> | 
-<a href="/PowerSocket/Toggle/6">%r6%</a>
 
-<pre>%msg%</pre>
+<div class="tabs">
+    <ul class="tab-links">
+        <li class="active"><a href="#tab1">Steckdosen</a></li>
+<!--        <li><a href="#tab2">Tab #2</a></li>
+        <li><a href="#tab3">Tab #3</a></li>
+-->        <li><a href="#tab4">System</a></li>
+    </ul>
+ <pre>%msg%</pre>
+    <div class="tab-content">
+        <div id="tab1" class="tab active">
+<p> <a class="button" href="/PowerSocket/Toggle/1">%r1%</a> </p> 
+<p> <a class="button" href="/PowerSocket/Toggle/2">%r2%</a> </p>  
+<p> <a class="button" href="/PowerSocket/Toggle/3">%r3%</a> </p>  
+<p> <a class="button" href="/PowerSocket/Toggle/4">%r4%</a> </p>  
+<p> <a class="button" href="/PowerSocket/Toggle/5">%r5%</a> </p>  
+<p> <a class="button" href="/PowerSocket/Toggle/6">%r6%</a> </p> 
+        </div>
 
-<small>Adresse: %bindto%</small>
+<!-- 
+        <div id="tab2" class="tab">
+            <p>Tab #2 content goes here!</p>
+            <p>Donec pulvinar neque sed semper lacinia. Curabitur lacinia ullamcorper nibh; quis imperdiet velit eleifend ac. Donec blandit mauris eget aliquet lacinia! Donec pulvinar massa interdum risus ornare mollis. In hac habitasse platea dictumst. Ut euismod tempus hendrerit. Morbi ut adipiscing nisi. Etiam rutrum sodales gravida! Aliquam tellus orci, iaculis vel.</p>
+        </div>
+ 
+        <div id="tab3" class="tab">
+            <p>Tab #3 content goes here!</p>
+            <p>Donec pulvinar neque sed semper lacinia. Curabitur lacinia ullamcorper nibh; quis imperdiet velit eleifend ac. Donec blandit mauris eget aliquet lacinia! Donec pulvinar massa interdum ri.</p>
+        </div>
+--> 
+        <div id="tab4" class="tab">
+<p>Version: %version%</p>
+<p> Adresse: %bindto%</p>   
+     </div>
+    </div>
+</div>
+
+
+
+
+
 </body>
