@@ -5,12 +5,14 @@ Created on 26.12.2014
 '''
 #!/usr/bin/python
 from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
-import PowerSocket
 import Site
 import ConfigParser
+import importlib
 
 Config = ConfigParser.ConfigParser()
 Config.read("config.ini")
+
+
 
 PORT_NUMBER = 8000
 HTML = Site.LoadIndex()
@@ -48,7 +50,14 @@ class myHandler(BaseHTTPRequestHandler):
 
 
 try:
-    PowerSocket.Setup()
+    #Setup the modules
+    for index, section in enumerate(Config.sections()):
+        try:
+            getattr(importlib.import_module(section),"Setup")()
+        except:
+            pass
+        
+    
     #Create a web server and define the handler to manage the
     #incoming request
     server = HTTPServer((Config.get("Internal", "bindto"), PORT_NUMBER), myHandler)
@@ -60,4 +69,10 @@ try:
 except KeyboardInterrupt:
     print '^C received, shutting down the web server'
     server.socket.close()
-    PowerSocket.Unset()
+    
+    #Shutdown the modules
+    for index, section in enumerate(Config.sections()):
+        try:
+            getattr(importlib.import_module(section),"Unset")()
+        except:
+            pass
