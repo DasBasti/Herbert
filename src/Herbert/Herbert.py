@@ -51,7 +51,7 @@ try:
     PowerSocket.Setup()
     #Create a web server and define the handler to manage the
     #incoming request
-    server = HTTPServer((Config.get("System", "bindto"), PORT_NUMBER), myHandler)
+    server = HTTPServer((Config.get("Internal", "bindto"), PORT_NUMBER), myHandler)
     print 'Started httpserver on ', server.server_address
     
     #Wait forever for incoming htto requests

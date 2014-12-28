@@ -32,7 +32,13 @@ def Toggle(rel):
     time.sleep(0.2)
     GPIO.output(BTN[rel], 1)
               
-    return "toggle: "+str(rel)
+    #return "toggle: "+str(rel)
+
+def CreateLink(socket, name, field):
+    return "<p> <a class=\"button\" href=\"/PowerSocket/Toggle/"+str(socket)+"\">"+name+"</a> </p>"
+
+def CreateText():
+    return ""
 
 def Unset():
     GPIO.cleanup()
